@@ -1,4 +1,5 @@
 #include "thread.h"
+#include "element.h"
 
 int main(int argc, char *argv[])
 {
@@ -20,6 +21,9 @@ int main(int argc, char *argv[])
     thread->metricTaperThread("МК6x1LH ГОСТ 25229-82");
     thread->inchTaperThread("К1/16\"LH ГОСТ 6111-52");
     thread->roundTaperThread("Кр12x2,54 ГОСТ 13356-68");
-
     delete thread;
+
+    Element *element = new Element();
+    element->chamfer("2x45°");
+    delete element;
 }

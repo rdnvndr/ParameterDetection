@@ -226,7 +226,7 @@ void Thread::buttress45Thread(const QString &designation)
 {
     QRegExp threadRx(
                 "([\\s\\S]*)"                     // Текст до           (1)
-                "S45°\\s*"                      // Тип резьбы
+                "S45°\\s*"                        // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "(("
                    "[xX]\\s*"
@@ -406,7 +406,7 @@ void Thread::roundTaperThread(const QString &designation)
         QString After = threadRx.cap(4);  // Текст после
 
         qDebug() << "\n"
-                 << "  Тип резьбы:" << " Круглая для санитарно-технической арматуры" << "\n"
+                 << "  Тип резьбы:" << "Круглая для санитарно-технической арматуры" << "\n"
                  << "    Текст до:" << Before << "\n"
                  << "     Диаметр:" << D  << "\n"
                  << "         Шаг:" << P  << "\n"
