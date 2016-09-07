@@ -26,6 +26,21 @@ public:
     //! Упорная усиленная 45
     void buttress45Thread(const QString &designation);
 
+    //! Трубная цилиндрическая
+    void pipeCylindricalThread(const QString &designation);
+
+    //! Трубная коническая
+    void pipeTaperThread(const QString &designation);
+
+    //! Метрическая коническая
+    void metricTaperThread(const QString &designation);
+
+    //! Коническая дюймовая
+    void inchTaperThread(const QString &designation);
+
+    //! Круглая для санитарно-технической арматуры
+    void roundTaperThread(const QString &designation);
+
 };
 
 #endif // THREAD_H

@@ -2,6 +2,9 @@
 
 int main(int argc, char *argv[])
 {
+    Q_UNUSED(argc)
+    Q_UNUSED(argv)
+
     Thread *thread = new Thread();
     thread->metricalThread("M12xPh2P1(Два захода)-6g6h-S(10)-LH");
     thread->metricalMjThread("MJ12x1-6g6h-LH");
@@ -11,5 +14,12 @@ int main(int argc, char *argv[])
     thread->buttressThread("S16x8LH-7e-120");
     thread->buttress45Thread("S45°16x8P(10)LH-7e-120");
     thread->buttress45Thread("S45°16x8LH-7e-120");
+    thread->pipeCylindricalThread("G1/16LH-A-150");
+    thread->pipeTaperThread("R1/16LH");
+    thread->pipeTaperThread("Rc1/16LH");
+    thread->metricTaperThread("МК6x1LH ГОСТ 25229-82");
+    thread->inchTaperThread("К1/16\"LH ГОСТ 6111-52");
+    thread->roundTaperThread("Кр12x2,54 ГОСТ 13356-68");
+
     delete thread;
 }

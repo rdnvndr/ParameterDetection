@@ -129,15 +129,15 @@ void Thread::trapezoidalMultiStartThread(const QString &designation)
         QString After = threadRx.cap(10); // Текст после
 
         qDebug() << "\n"
-                 << "        Тип резьбы:" << "Трапецеидальная многозаходная" << "\n"
-                 << "          Текст до:" << Before << "\n"
-                 << "           Диаметр:" << D  << "\n"
-                 << "               Ход:" << H  << "\n"
-                 << "               Шаг:" << P  << "\n"
-                 << "      Левая резьба:" << LH << "\n"
-                 << "            Допуск:" << T  << "\n"
-                 << " Длина свинчивания:" << L  << "\n"
-                 << "       Текст после:" << After << "\n";
+                 << "       Тип резьбы:" << "Трапецеидальная многозаходная" << "\n"
+                 << "         Текст до:" << Before << "\n"
+                 << "          Диаметр:" << D  << "\n"
+                 << "              Ход:" << H  << "\n"
+                 << "              Шаг:" << P  << "\n"
+                 << "     Левая резьба:" << LH << "\n"
+                 << "           Допуск:" << T  << "\n"
+                 << "Длина свинчивания:" << L  << "\n"
+                 << "      Текст после:" << After << "\n";
     }
 }
 
@@ -166,14 +166,14 @@ void Thread::trapezoidalSingleStartThread(const QString &designation)
         QString After = threadRx.cap(9); // Текст после
 
         qDebug() << "\n"
-                 << "        Тип резьбы:" << "Трапецеидальная однозаходная" << "\n"
-                 << "          Текст до:" << Before << "\n"
-                 << "           Диаметр:" << D  << "\n"
-                 << "               Шаг:" << P      << "\n"
-                 << "      Левая резьба:" << LH << "\n"
-                 << "            Допуск:" << T  << "\n"
-                 << " Длина свинчивания:" << L  << "\n"
-                 << "       Текст после:" << After << "\n";
+                 << "       Тип резьбы:" << "Трапецеидальная однозаходная" << "\n"
+                 << "         Текст до:" << Before << "\n"
+                 << "          Диаметр:" << D  << "\n"
+                 << "              Шаг:" << P      << "\n"
+                 << "     Левая резьба:" << LH << "\n"
+                 << "           Допуск:" << T  << "\n"
+                 << "Длина свинчивания:" << L  << "\n"
+                 << "      Текст после:" << After << "\n";
     }
 }
 
@@ -210,15 +210,15 @@ void Thread::buttressThread(const QString &designation)
         QString After = threadRx.cap(14); // Текст после
 
         qDebug() << "\n"
-                 << "        Тип резьбы:" << "Упорная" << "\n"
-                 << "          Текст до:" << Before << "\n"
-                 << "           Диаметр:" << D  << "\n"
-                 << "               Ход:" << H  << "\n"
-                 << "               Шаг:" << P1 << "\n"
-                 << "      Левая резьба:" << LH << "\n"
-                 << "            Допуск:" << T  << "\n"
-                 << " Длина свинчивания:" << L  << "\n"
-                 << "       Текст после:" << After << "\n";
+                 << "       Тип резьбы:" << "Упорная" << "\n"
+                 << "         Текст до:" << Before << "\n"
+                 << "          Диаметр:" << D  << "\n"
+                 << "              Ход:" << H  << "\n"
+                 << "              Шаг:" << P1 << "\n"
+                 << "     Левая резьба:" << LH << "\n"
+                 << "           Допуск:" << T  << "\n"
+                 << "Длина свинчивания:" << L  << "\n"
+                 << "      Текст после:" << After << "\n";
     }
 }
 
@@ -255,14 +255,161 @@ void Thread::buttress45Thread(const QString &designation)
         QString After = threadRx.cap(14); // Текст после
 
         qDebug() << "\n"
-                 << "        Тип резьбы:" << "Упорная усиленная 45" << "\n"
-                 << "          Текст до:" << Before << "\n"
-                 << "           Диаметр:" << D  << "\n"
-                 << "               Ход:" << H  << "\n"
-                 << "               Шаг:" << P1 << "\n"
-                 << "      Левая резьба:" << LH << "\n"
-                 << "            Допуск:" << T  << "\n"
-                 << " Длина свинчивания:" << L  << "\n"
-                 << "       Текст после:" << After << "\n";
+                 << "       Тип резьбы:" << "Упорная усиленная 45" << "\n"
+                 << "         Текст до:" << Before << "\n"
+                 << "          Диаметр:" << D  << "\n"
+                 << "              Ход:" << H  << "\n"
+                 << "              Шаг:" << P1 << "\n"
+                 << "     Левая резьба:" << LH << "\n"
+                 << "           Допуск:" << T  << "\n"
+                 << "Длина свинчивания:" << L  << "\n"
+                 << "      Текст после:" << After << "\n";
+    }
+}
+
+void Thread::pipeCylindricalThread(const QString &designation)
+{
+    QRegExp threadRx(
+                "([\\s\\S]*)"                     // Текст до           (1)
+                "G\\s*"                           // Тип резьбы
+                "(\\d+\\/?\\d*)+\\s*"             // Диаметр            (2)
+                "([Ll][Hh])?\\s*"                 // Левая резьба       (3)
+                "(\\-\\s*(\\w))?\\s*"             // Допуск             (5)
+                "(\\-\\s*(\\d+\\,?\\d*))?\\s*"    // Длина  свинчивания (7)
+                "([\\s\\S]*)?"                    // Текст после        (8)
+                );
+
+    int pos = threadRx.indexIn(designation);
+    if (pos > -1) {
+        QString Before = threadRx.cap(1); // Текст до
+        QString D = threadRx.cap(2);      // Диаметр
+        QString LH = threadRx.cap(3);     // Левая резьба
+        QString T = threadRx.cap(5);      // Допуск
+        QString L = threadRx.cap(7);      // Длина свинчивания
+        QString After = threadRx.cap(8);  // Текст после
+
+        qDebug() << "\n"
+                 << "       Тип резьбы:" << "Трубная цилиндрическая" << "\n"
+                 << "         Текст до:" << Before << "\n"
+                 << "          Диаметр:" << D  << "\n"
+                 << "     Левая резьба:" << LH << "\n"
+                 << "           Допуск:" << T  << "\n"
+                 << "Длина свинчивания:" << L  << "\n"
+                 << "      Текст после:" << After << "\n";
+    }
+}
+
+void Thread::pipeTaperThread(const QString &designation)
+{
+    QRegExp threadRx(
+                "([\\s\\S]*)"                     // Текст до      (1)
+                "R"                               // Тип резьбы
+                "(c)?\\s*"                        // Система       (2)
+                "(\\d+\\/?\\d*)+\\s*"             // Диаметр       (3)
+                "([Ll][Hh])?\\s*"                 // Левая резьба  (4)
+                "([\\s\\S]*)?"                    // Текст после   (5)
+                );
+
+    int pos = threadRx.indexIn(designation);
+    if (pos > -1) {
+        QString Before = threadRx.cap(1); // Текст до
+        QString S = threadRx.cap(2);      // Система
+        QString D = threadRx.cap(3);      // Диаметр
+        QString LH = threadRx.cap(4);     // Левая резьба
+        QString After = threadRx.cap(5);  // Текст после
+
+        qDebug() << "\n"
+                 << "  Тип резьбы:" << "Трубная коническая" << "\n"
+                 << "    Текст до:" << Before << "\n"
+                 << "     Система:" << S  << "\n"
+                 << "     Диаметр:" << D  << "\n"
+                 << "Левая резьба:" << LH << "\n"
+                 << " Текст после:" << After << "\n";
+    }
+}
+
+void Thread::metricTaperThread(const QString &designation)
+{
+    QRegExp threadRx(
+                "([\\s\\S]*)"                     // Текст до      (1)
+                "МК\\s*"                          // Тип резьбы
+                "(\\d+\\,?\\d*)+\\s*"             // Диаметр       (2)
+                "[xX]\\s*"                        // Знак умножения
+                "(\\d+\\,?\\d*)\\s*"              // Шаг резьбы    (3)
+                "([Ll][Hh])?\\s*"                 // Левая резьба  (4)
+                "ГОСТ\\s*25229\\s*-\\s*82\\s*"
+                "([\\s\\S]*)?"                    // Текст после   (5)
+                );
+
+    int pos = threadRx.indexIn(designation);
+    if (pos > -1) {
+        QString Before = threadRx.cap(1); // Текст до
+        QString D = threadRx.cap(2);      // Диаметр
+        QString P = threadRx.cap(3);      // Шаг
+        QString LH = threadRx.cap(4);     // Левая резьба
+        QString After = threadRx.cap(5);  // Текст после
+
+        qDebug() << "\n"
+                 << "  Тип резьбы:" << "Метрическая коническая" << "\n"
+                 << "    Текст до:" << Before << "\n"
+                 << "     Диаметр:" << D  << "\n"
+                 << "         Шаг:" << P  << "\n"
+                 << "Левая резьба:" << LH << "\n"
+                 << " Текст после:" << After << "\n";
+    }
+}
+
+void Thread::inchTaperThread(const QString &designation)
+{
+    QRegExp threadRx(
+                "([\\s\\S]*)"                     // Текст до      (1)
+                "К\\s*"                           // Тип резьбы
+                "(\\d+\\/?\\d*)+\"?\\s*"          // Диаметр       (1)
+                "([Ll][Hh])?\\s*"                 // Левая резьба  (3)
+                "ГОСТ\\s*6111\\s*-\\s*52\\s*"
+                "([\\s\\S]*)?"                    // Текст после   (4)
+                );
+
+    int pos = threadRx.indexIn(designation);
+    if (pos > -1) {
+        QString Before = threadRx.cap(1); // Текст до
+        QString D = threadRx.cap(2);      // Диаметр
+        QString LH = threadRx.cap(3);     // Левая резьба
+        QString After = threadRx.cap(4);  // Текст после
+
+        qDebug() << "\n"
+                 << "  Тип резьбы:" << "Коническая дюймовая" << "\n"
+                 << "    Текст до:" << Before << "\n"
+                 << "     Диаметр:" << D  << "\n"
+                 << "Левая резьба:" << LH << "\n"
+                 << " Текст после:" << After << "\n";
+    }
+}
+
+void Thread::roundTaperThread(const QString &designation)
+{
+    QRegExp threadRx(
+                "([\\s\\S]*)"                     // Текст до      (1)
+                "Кр\\s*"                          // Тип резьбы
+                "(\\d+\\,?\\d*)+\\s*"             // Диаметр       (2)
+                "[xX]\\s*"                        // Знак умножения
+                "(\\d+\\,?\\d*)\\s*"              // Шаг резьбы    (3)
+                "ГОСТ\\s*13356\\s*-\\s*68\\s*"
+                "([\\s\\S]*)?"                    // Текст после   (4)
+                );
+
+    int pos = threadRx.indexIn(designation);
+    if (pos > -1) {
+        QString Before = threadRx.cap(1); // Текст до
+        QString D = threadRx.cap(2);      // Диаметр
+        QString P = threadRx.cap(3);      // Шаг
+        QString After = threadRx.cap(4);  // Текст после
+
+        qDebug() << "\n"
+                 << "  Тип резьбы:" << " Круглая для санитарно-технической арматуры" << "\n"
+                 << "    Текст до:" << Before << "\n"
+                 << "     Диаметр:" << D  << "\n"
+                 << "         Шаг:" << P  << "\n"
+                 << " Текст после:" << After << "\n";
     }
 }
