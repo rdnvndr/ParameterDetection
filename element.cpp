@@ -10,7 +10,7 @@ Element::Element()
 
 void Element::chamfer(const QString &designation)
 {
-    QRegExp сhamferRx(
+    QRegExp chamferRx(
                 "([\\s\\S]*[^\\d],)?"             // Текст до      (1)
                 "(\\d+\\,?\\d*)\\s*"              // Значение      (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -18,12 +18,12 @@ void Element::chamfer(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (4)
                 );
 
-    int pos = сhamferRx.indexIn(designation);
+    int pos = chamferRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = сhamferRx.cap(1); // Текст до
-        QString F = сhamferRx.cap(2);      // Диаметр
-        QString A = сhamferRx.cap(3);      // Шаг
-        QString After = сhamferRx.cap(4);  // Текст после
+        QString Before = chamferRx.cap(1); // Текст до
+        QString F = chamferRx.cap(2);      // Диаметр
+        QString A = chamferRx.cap(3);      // Шаг
+        QString After = chamferRx.cap(4);  // Текст после
 
         qDebug() << "\n"
                  << "     Элемент:" << "Фаска" << "\n"
