@@ -11,7 +11,7 @@ Element::Element()
 void Element::chamfer(const QString &designation)
 {
     QRegExp chamferRx(
-                "([\\s\\S]*[^\\d],)?"             // Текст до      (1)
+                "([\\s\\S]*[^\\d,])?"             // Текст до      (1)
                 "(\\d+\\,?\\d*)\\s*"              // Значение      (2)
                 "[xX]\\s*"                        // Знак умножения
                 "(\\d+\\,?\\d*)°\\s*"              // Угол          (3)
