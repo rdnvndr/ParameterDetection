@@ -24,6 +24,9 @@ int main(int argc, char *argv[])
     delete thread;
 
     Element *element = new Element();
-    element->chamfer("2x45°");
+    element->chamfer("Текст до2x45°");
+    element->lineDimension("Текст до10,2±10Текст после");
+    element->lineDimension("Текст до10,2JS7(±10)Текст после");
+    element->lineDimension("Текст до10,2H7(+0,02; -0,03)Текст после");
     delete element;
 }
