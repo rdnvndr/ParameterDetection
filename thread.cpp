@@ -1,6 +1,6 @@
 #include "thread.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDebug>
 
 Thread::Thread()
@@ -10,8 +10,8 @@ Thread::Thread()
 
 void Thread::metricalThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                               // Текст до (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                               // Текст до (1)
                 "M\\s*"                                     // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"                       // Диаметр  (2)
                 "("
@@ -33,21 +33,21 @@ void Thread::metricalThread(const QString &designation)
                 "([\\s\\S]*)?"                              // Текст после  (19)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1);  // Текст до
-        QString d = threadRx.cap(2);       // Диаметр
-        QString ph = threadRx.cap(5);      // Многозаходность
-        QString h = threadRx.cap(6);       // Ход
-        QString p = threadRx.cap(7);       // Шаг
-        QString z = threadRx.cap(8);       // Заходы
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1);  // Текст до
+        QString d = match.captured(2);       // Диаметр
+        QString ph = match.captured(5);      // Многозаходность
+        QString h = match.captured(6);       // Ход
+        QString p = match.captured(7);       // Шаг
+        QString z = match.captured(8);       // Заходы
         QString p1 = (p.isEmpty())
-                ? threadRx.cap(10) : p;    // Шаг
-        QString t = threadRx.cap(12);      // Допуск
-        QString g = threadRx.cap(14);      // Группа длины свинчивания
-        QString l = threadRx.cap(16);      // Длина свинчивания
-        QString lh = threadRx.cap(18);     // Левая резьба
-        QString after = threadRx.cap(19);  // Текст после
+                ? match.captured(10) : p;    // Шаг
+        QString t = match.captured(12);      // Допуск
+        QString g = match.captured(14);      // Группа длины свинчивания
+        QString l = match.captured(16);      // Длина свинчивания
+        QString lh = match.captured(18);     // Левая резьба
+        QString after = match.captured(19);  // Текст после
 
         qDebug() << "\n"
                  << "        Тип резьбы:" << "Метрическая резьба" << "\n"
@@ -67,8 +67,8 @@ void Thread::metricalThread(const QString &designation)
 
 void Thread::metricalMjThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"               // Текст до       (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"               // Текст до       (1)
                 "MJ\\s*"                    // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"       // Диаметр        (2)
                 "("
@@ -80,14 +80,14 @@ void Thread::metricalMjThread(const QString &designation)
                 "([\\s\\S]*)?"              // Текст после    (9)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString p = threadRx.cap(4);      // Шаг
-        QString t = threadRx.cap(6);      // Допуск
-        QString lh = threadRx.cap(8);     // Левая резьба
-        QString after = threadRx.cap(9);  // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString p = match.captured(4);      // Шаг
+        QString t = match.captured(6);      // Допуск
+        QString lh = match.captured(8);     // Левая резьба
+        QString after = match.captured(9);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Метрическая резьба с профилем MJ" << "\n"
@@ -102,8 +102,8 @@ void Thread::metricalMjThread(const QString &designation)
 
 void Thread::trapezoidalMultiStartThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до           (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до           (1)
                 "Tr\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -117,16 +117,16 @@ void Thread::trapezoidalMultiStartThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (10)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString h = threadRx.cap(3);      // Ход
-        QString p = threadRx.cap(4);      // Шаг
-        QString lh = threadRx.cap(5);     // Левая резьба
-        QString t = threadRx.cap(7);      // Допуск
-        QString l = threadRx.cap(9);      // Длина свинчивания
-        QString after = threadRx.cap(10); // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString h = match.captured(3);      // Ход
+        QString p = match.captured(4);      // Шаг
+        QString lh = match.captured(5);     // Левая резьба
+        QString t = match.captured(7);      // Допуск
+        QString l = match.captured(9);      // Длина свинчивания
+        QString after = match.captured(10); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Трапецеидальная многозаходная" << "\n"
@@ -143,8 +143,8 @@ void Thread::trapezoidalMultiStartThread(const QString &designation)
 
 void Thread::trapezoidalSingleStartThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до           (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до           (1)
                 "Tr\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -155,15 +155,15 @@ void Thread::trapezoidalSingleStartThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (10)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString p = threadRx.cap(3);      // Шаг
-        QString lh = threadRx.cap(4);     // Левая резьба
-        QString t = threadRx.cap(6);      // Допуск
-        QString l = threadRx.cap(8);      // Длина свинчивания
-        QString after = threadRx.cap(9); // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString p = match.captured(3);      // Шаг
+        QString lh = match.captured(4);     // Левая резьба
+        QString t = match.captured(6);      // Допуск
+        QString l = match.captured(8);      // Длина свинчивания
+        QString after = match.captured(9); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Трапецеидальная однозаходная" << "\n"
@@ -179,8 +179,8 @@ void Thread::trapezoidalSingleStartThread(const QString &designation)
 
 void Thread::buttressThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до           (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до           (1)
                 "S\\s*"                           // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "(("
@@ -196,18 +196,18 @@ void Thread::buttressThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (14)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString h = threadRx.cap(5);      // Ход
-        QString p = threadRx.cap(6);      // Шаг
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString h = match.captured(5);      // Ход
+        QString p = match.captured(6);      // Шаг
         QString p1 = (p.isEmpty())
-                ? threadRx.cap(8):p;      // Шаг
-        QString lh = threadRx.cap(9);     // Левая резьба
-        QString t = threadRx.cap(11);     // Допуск
-        QString l = threadRx.cap(13);     // Длина свинчивания
-        QString after = threadRx.cap(14); // Текст после
+                ? match.captured(8):p;      // Шаг
+        QString lh = match.captured(9);     // Левая резьба
+        QString t = match.captured(11);     // Допуск
+        QString l = match.captured(13);     // Длина свинчивания
+        QString after = match.captured(14); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Упорная" << "\n"
@@ -224,8 +224,8 @@ void Thread::buttressThread(const QString &designation)
 
 void Thread::buttress45Thread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до           (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до           (1)
                 "S45°\\s*"                        // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "(("
@@ -241,18 +241,18 @@ void Thread::buttress45Thread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (14)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString h = threadRx.cap(5);      // Ход
-        QString p = threadRx.cap(6);      // Шаг
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString h = match.captured(5);      // Ход
+        QString p = match.captured(6);      // Шаг
         QString p1 = (p.isEmpty())
-                ? threadRx.cap(8):p;      // Шаг
-        QString lh = threadRx.cap(9);     // Левая резьба
-        QString t = threadRx.cap(11);     // Допуск
-        QString l = threadRx.cap(13);     // Длина свинчивания
-        QString after = threadRx.cap(14); // Текст после
+                ? match.captured(8):p;      // Шаг
+        QString lh = match.captured(9);     // Левая резьба
+        QString t = match.captured(11);     // Допуск
+        QString l = match.captured(13);     // Длина свинчивания
+        QString after = match.captured(14); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Упорная усиленная 45" << "\n"
@@ -269,8 +269,8 @@ void Thread::buttress45Thread(const QString &designation)
 
 void Thread::pipeCylindricalThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до           (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до           (1)
                 "G\\s*"                           // Тип резьбы
                 "(\\d+\\/?\\d*)+\\s*"             // Диаметр            (2)
                 "([Ll][Hh])?\\s*"                 // Левая резьба       (3)
@@ -279,14 +279,14 @@ void Thread::pipeCylindricalThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (8)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString lh = threadRx.cap(3);     // Левая резьба
-        QString t = threadRx.cap(5);      // Допуск
-        QString l = threadRx.cap(7);      // Длина свинчивания
-        QString after = threadRx.cap(8);  // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString lh = match.captured(3);     // Левая резьба
+        QString t = match.captured(5);      // Допуск
+        QString l = match.captured(7);      // Длина свинчивания
+        QString after = match.captured(8);  // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Трубная цилиндрическая" << "\n"
@@ -301,8 +301,8 @@ void Thread::pipeCylindricalThread(const QString &designation)
 
 void Thread::pipeTaperThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до      (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до      (1)
                 "R"                               // Тип резьбы
                 "(c)?\\s*"                        // Система       (2)
                 "(\\d+\\/?\\d*)+\\s*"             // Диаметр       (3)
@@ -310,13 +310,13 @@ void Thread::pipeTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (5)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString s = threadRx.cap(2);      // Система
-        QString d = threadRx.cap(3);      // Диаметр
-        QString lh = threadRx.cap(4);     // Левая резьба
-        QString after = threadRx.cap(5);  // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString s = match.captured(2);      // Система
+        QString d = match.captured(3);      // Диаметр
+        QString lh = match.captured(4);     // Левая резьба
+        QString after = match.captured(5);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Трубная коническая" << "\n"
@@ -330,8 +330,8 @@ void Thread::pipeTaperThread(const QString &designation)
 
 void Thread::metricTaperThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до      (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до      (1)
                 "МК\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр       (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -341,13 +341,13 @@ void Thread::metricTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (5)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString p = threadRx.cap(3);      // Шаг
-        QString lh = threadRx.cap(4);     // Левая резьба
-        QString after = threadRx.cap(5);  // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString p = match.captured(3);      // Шаг
+        QString lh = match.captured(4);     // Левая резьба
+        QString after = match.captured(5);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Метрическая коническая" << "\n"
@@ -361,8 +361,8 @@ void Thread::metricTaperThread(const QString &designation)
 
 void Thread::inchTaperThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до      (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до      (1)
                 "К\\s*"                           // Тип резьбы
                 "(\\d+\\/?\\d*)+\"?\\s*"          // Диаметр       (1)
                 "([Ll][Hh])?\\s*"                 // Левая резьба  (3)
@@ -370,12 +370,12 @@ void Thread::inchTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (4)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString lh = threadRx.cap(3);     // Левая резьба
-        QString after = threadRx.cap(4);  // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString lh = match.captured(3);     // Левая резьба
+        QString after = match.captured(4);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Коническая дюймовая" << "\n"
@@ -388,8 +388,8 @@ void Thread::inchTaperThread(const QString &designation)
 
 void Thread::roundTaperThread(const QString &designation)
 {
-    QRegExp threadRx(
-                "([\\s\\S]*)"                     // Текст до      (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                     // Текст до      (1)
                 "Кр\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр       (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -398,12 +398,12 @@ void Thread::roundTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (4)
                 );
 
-    int pos = threadRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = threadRx.cap(1); // Текст до
-        QString d = threadRx.cap(2);      // Диаметр
-        QString p = threadRx.cap(3);      // Шаг
-        QString after = threadRx.cap(4);  // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString d = match.captured(2);      // Диаметр
+        QString p = match.captured(3);      // Шаг
+        QString after = match.captured(4);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Круглая для санитарно-технической арматуры" << "\n"

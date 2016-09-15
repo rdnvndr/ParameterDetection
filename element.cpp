@@ -1,6 +1,6 @@
 #include "element.h"
 
-#include <QRegExp>
+#include <QRegularExpression>
 #include <QDebug>
 
 Element::Element()
@@ -10,20 +10,20 @@ Element::Element()
 
 void Element::chamfer(const QString &designation)
 {
-    QRegExp chamferRx(
-                "([\\s\\S]*[^\\d,])?"             // Текст до      (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"             // Текст до      (1)
                 "(\\d+\\,?\\d*)\\s*"              // Значение      (2)
                 "[xX]\\s*"                        // Знак умножения
                 "(\\d+\\,?\\d*)°\\s*"             // Угол          (3)
                 "([\\s\\S]*)?"                    // Текст после   (4)
                 );
 
-    int pos = chamferRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = chamferRx.cap(1); // Текст до
-        QString f = chamferRx.cap(2);      // Диаметр
-        QString a = chamferRx.cap(3);      // Шаг
-        QString after = chamferRx.cap(4);  // Текст после
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1); // Текст до
+        QString f = match.captured(2);      // Диаметр
+        QString a = match.captured(3);      // Шаг
+        QString after = match.captured(4);  // Текст после
 
         qDebug() << "\n"
                  << "     Элемент:" << "Фаска" << "\n"
@@ -36,8 +36,8 @@ void Element::chamfer(const QString &designation)
 
 void Element::lineDimension(const QString &designation)
 {
-    QRegExp lineDimensionRx(
-                "([^\\,\\d]*)"                             // Текст до      (1)
+    QRegularExpression regex(
+                "([\\s\\S]*?)"                             // Текст до      (1)
                 "(\\d+\\,?\\d*)\\s*"                       // Значение      (2)
                 "([a-zA-z]{1,2}\\d{1,2})?\\s*"             // Класс допуска (3)
                 "("
@@ -52,15 +52,16 @@ void Element::lineDimension(const QString &designation)
                 ")?"
                 "([\\s\\S]*)?"                             // Текст после   (14)
                 );
-    int pos = lineDimensionRx.indexIn(designation);
-    if (pos > -1) {
-        QString before = lineDimensionRx.cap(1);    // Текст до
-        QString nominal = lineDimensionRx.cap(2);   // Значение
-        QString tolClass = lineDimensionRx.cap(3);  // Класс допуска
-        QString es = lineDimensionRx.cap(6);        // Верхнее отклонение
-        QString ei = lineDimensionRx.cap(8);        // Нижнее отклонение
-        QString es_ei = lineDimensionRx.cap(13);    // Верх./нижн. отклонение
-        QString after = lineDimensionRx.cap(14);    // Текст после
+
+    QRegularExpressionMatch match = regex.match(designation);
+    if (match.hasMatch()) {
+        QString before = match.captured(1);    // Текст до
+        QString nominal = match.captured(2);   // Значение
+        QString tolClass = match.captured(3);  // Класс допуска
+        QString es = match.captured(6);        // Верхнее отклонение
+        QString ei = match.captured(8);        // Нижнее отклонение
+        QString es_ei = match.captured(13);    // Верх./нижн. отклонение
+        QString after = match.captured(14);    // Текст после
 
         qDebug() << "\n"
                  << "               Элемент:" << "Линейный размер:" << "\n"

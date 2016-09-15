@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 
     Element *element = new Element();
     element->chamfer("Текст до2x45°");
-    element->lineDimension("Текст до10,2±10Текст после");
+    element->lineDimension("Текст до10,2±10,3Текст после");
     element->lineDimension("Текст до10,2JS7(±10)Текст после");
     element->lineDimension("Текст до10,2H7(+0,02; -0,03)Текст после");
     delete element;
