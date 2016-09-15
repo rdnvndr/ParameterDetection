@@ -28,5 +28,9 @@ int main(int argc, char *argv[])
     element->lineDimension("Текст до10,2±10,3Текст после");
     element->lineDimension("Текст до10,2JS7(±10)Текст после");
     element->lineDimension("Текст до10,2H7(+0,02; -0,03)Текст после");
+    element->lineDimension("Текст до10,1+0,02; -0,03Текст после");
+    element->angleDimension("Текст до10,2±10,3Текст после");
+    element->angleDimension("Текст до10,1°+0,02°; -0,03°Текст после");
+    element->angleDimension("Текст до10,1(+0,02; -0,03)Текст после");
     delete element;
 }
