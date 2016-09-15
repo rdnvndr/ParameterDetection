@@ -35,33 +35,33 @@ void Thread::metricalThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1);  // Текст до
-        QString D = threadRx.cap(2);       // Диаметр
-        QString Ph = threadRx.cap(5);      // Многозаходность
-        QString H = threadRx.cap(6);       // Ход
-        QString P = threadRx.cap(7);       // Шаг
-        QString Z = threadRx.cap(8);       // Заходы
-        QString P1 = (P.isEmpty())
-                ? threadRx.cap(10) : P;    // Шаг
-        QString T = threadRx.cap(12);      // Допуск
-        QString G = threadRx.cap(14);      // Группа длины свинчивания
-        QString L = threadRx.cap(16);      // Длина свинчивания
-        QString LH = threadRx.cap(18);     // Левая резьба
-        QString After = threadRx.cap(19);  // Текст после
+        QString before = threadRx.cap(1);  // Текст до
+        QString d = threadRx.cap(2);       // Диаметр
+        QString ph = threadRx.cap(5);      // Многозаходность
+        QString h = threadRx.cap(6);       // Ход
+        QString p = threadRx.cap(7);       // Шаг
+        QString z = threadRx.cap(8);       // Заходы
+        QString p1 = (p.isEmpty())
+                ? threadRx.cap(10) : p;    // Шаг
+        QString t = threadRx.cap(12);      // Допуск
+        QString g = threadRx.cap(14);      // Группа длины свинчивания
+        QString l = threadRx.cap(16);      // Длина свинчивания
+        QString lh = threadRx.cap(18);     // Левая резьба
+        QString after = threadRx.cap(19);  // Текст после
 
         qDebug() << "\n"
                  << "        Тип резьбы:" << "Метрическая резьба" << "\n"
-                 << "          Текст до:" << Before << "\n"
-                 << "           Диаметр:" << D  << "\n"
-                 << "   Многозаходность:" << Ph << "\n"
-                 << "               Ход:" << H  << "\n"
-                 << "           Заходов:" << Z  << "\n"
-                 << "               Шаг:" << P1 << "\n"
-                 << "            Допуск:" << T  << "\n"
-                 << "Группа свинчивания:" << G  << "\n"
-                 << " Длина свинчивания:" << L  << "\n"
-                 << "      Левая резьба:" << LH << "\n"
-                 << "       Текст после:" << After << "\n";
+                 << "          Текст до:" << before << "\n"
+                 << "           Диаметр:" << d  << "\n"
+                 << "   Многозаходность:" << ph << "\n"
+                 << "               Ход:" << h  << "\n"
+                 << "           Заходов:" << z  << "\n"
+                 << "               Шаг:" << p1 << "\n"
+                 << "            Допуск:" << t  << "\n"
+                 << "Группа свинчивания:" << g  << "\n"
+                 << " Длина свинчивания:" << l  << "\n"
+                 << "      Левая резьба:" << lh << "\n"
+                 << "       Текст после:" << after << "\n";
     }
 }
 
@@ -82,21 +82,21 @@ void Thread::metricalMjThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString P = threadRx.cap(4);      // Шаг
-        QString T = threadRx.cap(6);      // Допуск
-        QString LH = threadRx.cap(8);     // Левая резьба
-        QString After = threadRx.cap(9);  // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString p = threadRx.cap(4);      // Шаг
+        QString t = threadRx.cap(6);      // Допуск
+        QString lh = threadRx.cap(8);     // Левая резьба
+        QString after = threadRx.cap(9);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Метрическая резьба с профилем MJ" << "\n"
-                 << "    Текст до:" << Before << "\n"
-                 << "     Диаметр:" << D      << "\n"
-                 << "         Шаг:" << P      << "\n"
-                 << "      Допуск:" << T      << "\n"
-                 << "Левая резьба:" << LH     << "\n"
-                 << " Текст после:" << After  << "\n";
+                 << "    Текст до:" << before << "\n"
+                 << "     Диаметр:" << d      << "\n"
+                 << "         Шаг:" << p      << "\n"
+                 << "      Допуск:" << t      << "\n"
+                 << "Левая резьба:" << lh     << "\n"
+                 << " Текст после:" << after  << "\n";
     }
 }
 
@@ -119,25 +119,25 @@ void Thread::trapezoidalMultiStartThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString H = threadRx.cap(3);      // Ход
-        QString P = threadRx.cap(4);      // Шаг
-        QString LH = threadRx.cap(5);     // Левая резьба
-        QString T = threadRx.cap(7);      // Допуск
-        QString L = threadRx.cap(9);      // Длина свинчивания
-        QString After = threadRx.cap(10); // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString h = threadRx.cap(3);      // Ход
+        QString p = threadRx.cap(4);      // Шаг
+        QString lh = threadRx.cap(5);     // Левая резьба
+        QString t = threadRx.cap(7);      // Допуск
+        QString l = threadRx.cap(9);      // Длина свинчивания
+        QString after = threadRx.cap(10); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Трапецеидальная многозаходная" << "\n"
-                 << "         Текст до:" << Before << "\n"
-                 << "          Диаметр:" << D  << "\n"
-                 << "              Ход:" << H  << "\n"
-                 << "              Шаг:" << P  << "\n"
-                 << "     Левая резьба:" << LH << "\n"
-                 << "           Допуск:" << T  << "\n"
-                 << "Длина свинчивания:" << L  << "\n"
-                 << "      Текст после:" << After << "\n";
+                 << "         Текст до:" << before << "\n"
+                 << "          Диаметр:" << d  << "\n"
+                 << "              Ход:" << h  << "\n"
+                 << "              Шаг:" << p  << "\n"
+                 << "     Левая резьба:" << lh << "\n"
+                 << "           Допуск:" << t  << "\n"
+                 << "Длина свинчивания:" << l  << "\n"
+                 << "      Текст после:" << after << "\n";
     }
 }
 
@@ -157,23 +157,23 @@ void Thread::trapezoidalSingleStartThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString P = threadRx.cap(3);      // Шаг
-        QString LH = threadRx.cap(4);     // Левая резьба
-        QString T = threadRx.cap(6);      // Допуск
-        QString L = threadRx.cap(8);      // Длина свинчивания
-        QString After = threadRx.cap(9); // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString p = threadRx.cap(3);      // Шаг
+        QString lh = threadRx.cap(4);     // Левая резьба
+        QString t = threadRx.cap(6);      // Допуск
+        QString l = threadRx.cap(8);      // Длина свинчивания
+        QString after = threadRx.cap(9); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Трапецеидальная однозаходная" << "\n"
-                 << "         Текст до:" << Before << "\n"
-                 << "          Диаметр:" << D  << "\n"
-                 << "              Шаг:" << P      << "\n"
-                 << "     Левая резьба:" << LH << "\n"
-                 << "           Допуск:" << T  << "\n"
-                 << "Длина свинчивания:" << L  << "\n"
-                 << "      Текст после:" << After << "\n";
+                 << "         Текст до:" << before << "\n"
+                 << "          Диаметр:" << d  << "\n"
+                 << "              Шаг:" << p      << "\n"
+                 << "     Левая резьба:" << lh << "\n"
+                 << "           Допуск:" << t  << "\n"
+                 << "Длина свинчивания:" << l  << "\n"
+                 << "      Текст после:" << after << "\n";
     }
 }
 
@@ -198,27 +198,27 @@ void Thread::buttressThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString H = threadRx.cap(5);      // Ход
-        QString P = threadRx.cap(6);      // Шаг
-        QString P1 = (P.isEmpty())
-                ? threadRx.cap(8):P;      // Шаг
-        QString LH = threadRx.cap(9);     // Левая резьба
-        QString T = threadRx.cap(11);     // Допуск
-        QString L = threadRx.cap(13);     // Длина свинчивания
-        QString After = threadRx.cap(14); // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString h = threadRx.cap(5);      // Ход
+        QString p = threadRx.cap(6);      // Шаг
+        QString p1 = (p.isEmpty())
+                ? threadRx.cap(8):p;      // Шаг
+        QString lh = threadRx.cap(9);     // Левая резьба
+        QString t = threadRx.cap(11);     // Допуск
+        QString l = threadRx.cap(13);     // Длина свинчивания
+        QString after = threadRx.cap(14); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Упорная" << "\n"
-                 << "         Текст до:" << Before << "\n"
-                 << "          Диаметр:" << D  << "\n"
-                 << "              Ход:" << H  << "\n"
-                 << "              Шаг:" << P1 << "\n"
-                 << "     Левая резьба:" << LH << "\n"
-                 << "           Допуск:" << T  << "\n"
-                 << "Длина свинчивания:" << L  << "\n"
-                 << "      Текст после:" << After << "\n";
+                 << "         Текст до:" << before << "\n"
+                 << "          Диаметр:" << d  << "\n"
+                 << "              Ход:" << h  << "\n"
+                 << "              Шаг:" << p1 << "\n"
+                 << "     Левая резьба:" << lh << "\n"
+                 << "           Допуск:" << t  << "\n"
+                 << "Длина свинчивания:" << l  << "\n"
+                 << "      Текст после:" << after << "\n";
     }
 }
 
@@ -243,27 +243,27 @@ void Thread::buttress45Thread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString H = threadRx.cap(5);      // Ход
-        QString P = threadRx.cap(6);      // Шаг
-        QString P1 = (P.isEmpty())
-                ? threadRx.cap(8):P;      // Шаг
-        QString LH = threadRx.cap(9);     // Левая резьба
-        QString T = threadRx.cap(11);     // Допуск
-        QString L = threadRx.cap(13);     // Длина свинчивания
-        QString After = threadRx.cap(14); // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString h = threadRx.cap(5);      // Ход
+        QString p = threadRx.cap(6);      // Шаг
+        QString p1 = (p.isEmpty())
+                ? threadRx.cap(8):p;      // Шаг
+        QString lh = threadRx.cap(9);     // Левая резьба
+        QString t = threadRx.cap(11);     // Допуск
+        QString l = threadRx.cap(13);     // Длина свинчивания
+        QString after = threadRx.cap(14); // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Упорная усиленная 45" << "\n"
-                 << "         Текст до:" << Before << "\n"
-                 << "          Диаметр:" << D  << "\n"
-                 << "              Ход:" << H  << "\n"
-                 << "              Шаг:" << P1 << "\n"
-                 << "     Левая резьба:" << LH << "\n"
-                 << "           Допуск:" << T  << "\n"
-                 << "Длина свинчивания:" << L  << "\n"
-                 << "      Текст после:" << After << "\n";
+                 << "         Текст до:" << before << "\n"
+                 << "          Диаметр:" << d  << "\n"
+                 << "              Ход:" << h  << "\n"
+                 << "              Шаг:" << p1 << "\n"
+                 << "     Левая резьба:" << lh << "\n"
+                 << "           Допуск:" << t  << "\n"
+                 << "Длина свинчивания:" << l  << "\n"
+                 << "      Текст после:" << after << "\n";
     }
 }
 
@@ -281,21 +281,21 @@ void Thread::pipeCylindricalThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString LH = threadRx.cap(3);     // Левая резьба
-        QString T = threadRx.cap(5);      // Допуск
-        QString L = threadRx.cap(7);      // Длина свинчивания
-        QString After = threadRx.cap(8);  // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString lh = threadRx.cap(3);     // Левая резьба
+        QString t = threadRx.cap(5);      // Допуск
+        QString l = threadRx.cap(7);      // Длина свинчивания
+        QString after = threadRx.cap(8);  // Текст после
 
         qDebug() << "\n"
                  << "       Тип резьбы:" << "Трубная цилиндрическая" << "\n"
-                 << "         Текст до:" << Before << "\n"
-                 << "          Диаметр:" << D  << "\n"
-                 << "     Левая резьба:" << LH << "\n"
-                 << "           Допуск:" << T  << "\n"
-                 << "Длина свинчивания:" << L  << "\n"
-                 << "      Текст после:" << After << "\n";
+                 << "         Текст до:" << before << "\n"
+                 << "          Диаметр:" << d  << "\n"
+                 << "     Левая резьба:" << lh << "\n"
+                 << "           Допуск:" << t  << "\n"
+                 << "Длина свинчивания:" << l  << "\n"
+                 << "      Текст после:" << after << "\n";
     }
 }
 
@@ -312,19 +312,19 @@ void Thread::pipeTaperThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString S = threadRx.cap(2);      // Система
-        QString D = threadRx.cap(3);      // Диаметр
-        QString LH = threadRx.cap(4);     // Левая резьба
-        QString After = threadRx.cap(5);  // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString s = threadRx.cap(2);      // Система
+        QString d = threadRx.cap(3);      // Диаметр
+        QString lh = threadRx.cap(4);     // Левая резьба
+        QString after = threadRx.cap(5);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Трубная коническая" << "\n"
-                 << "    Текст до:" << Before << "\n"
-                 << "     Система:" << S  << "\n"
-                 << "     Диаметр:" << D  << "\n"
-                 << "Левая резьба:" << LH << "\n"
-                 << " Текст после:" << After << "\n";
+                 << "    Текст до:" << before << "\n"
+                 << "     Система:" << s  << "\n"
+                 << "     Диаметр:" << d  << "\n"
+                 << "Левая резьба:" << lh << "\n"
+                 << " Текст после:" << after << "\n";
     }
 }
 
@@ -343,19 +343,19 @@ void Thread::metricTaperThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString P = threadRx.cap(3);      // Шаг
-        QString LH = threadRx.cap(4);     // Левая резьба
-        QString After = threadRx.cap(5);  // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString p = threadRx.cap(3);      // Шаг
+        QString lh = threadRx.cap(4);     // Левая резьба
+        QString after = threadRx.cap(5);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Метрическая коническая" << "\n"
-                 << "    Текст до:" << Before << "\n"
-                 << "     Диаметр:" << D  << "\n"
-                 << "         Шаг:" << P  << "\n"
-                 << "Левая резьба:" << LH << "\n"
-                 << " Текст после:" << After << "\n";
+                 << "    Текст до:" << before << "\n"
+                 << "     Диаметр:" << d  << "\n"
+                 << "         Шаг:" << p  << "\n"
+                 << "Левая резьба:" << lh << "\n"
+                 << " Текст после:" << after << "\n";
     }
 }
 
@@ -372,17 +372,17 @@ void Thread::inchTaperThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString LH = threadRx.cap(3);     // Левая резьба
-        QString After = threadRx.cap(4);  // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString lh = threadRx.cap(3);     // Левая резьба
+        QString after = threadRx.cap(4);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Коническая дюймовая" << "\n"
-                 << "    Текст до:" << Before << "\n"
-                 << "     Диаметр:" << D  << "\n"
-                 << "Левая резьба:" << LH << "\n"
-                 << " Текст после:" << After << "\n";
+                 << "    Текст до:" << before << "\n"
+                 << "     Диаметр:" << d  << "\n"
+                 << "Левая резьба:" << lh << "\n"
+                 << " Текст после:" << after << "\n";
     }
 }
 
@@ -400,16 +400,16 @@ void Thread::roundTaperThread(const QString &designation)
 
     int pos = threadRx.indexIn(designation);
     if (pos > -1) {
-        QString Before = threadRx.cap(1); // Текст до
-        QString D = threadRx.cap(2);      // Диаметр
-        QString P = threadRx.cap(3);      // Шаг
-        QString After = threadRx.cap(4);  // Текст после
+        QString before = threadRx.cap(1); // Текст до
+        QString d = threadRx.cap(2);      // Диаметр
+        QString p = threadRx.cap(3);      // Шаг
+        QString after = threadRx.cap(4);  // Текст после
 
         qDebug() << "\n"
                  << "  Тип резьбы:" << "Круглая для санитарно-технической арматуры" << "\n"
-                 << "    Текст до:" << Before << "\n"
-                 << "     Диаметр:" << D  << "\n"
-                 << "         Шаг:" << P  << "\n"
-                 << " Текст после:" << After << "\n";
+                 << "    Текст до:" << before << "\n"
+                 << "     Диаметр:" << d  << "\n"
+                 << "         Шаг:" << p  << "\n"
+                 << " Текст после:" << after << "\n";
     }
 }
