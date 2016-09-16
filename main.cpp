@@ -32,5 +32,7 @@ int main(int argc, char *argv[])
     element->angleDimension("Текст до10,2±10,3Текст после");
     element->angleDimension("Текст до10,1°+0,02°; -0,03°Текст после");
     element->angleDimension("Текст до10,1(+0,02; -0,03)Текст после");
+    element->angleDimension("Текст до10°11'12\"+10°11'12\";-10°11'12\"Текст после");
+    element->angleDimension("Текст до10°11'12\"±10°11'12\"Текст после");
     delete element;
 }

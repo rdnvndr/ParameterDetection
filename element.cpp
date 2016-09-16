@@ -78,29 +78,37 @@ void Element::lineDimension(const QString &designation)
 void Element::angleDimension(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                             // Текст до      (1)
-                "(\\d+\\,?\\d*°?)\\s*"                       // Значение      (2)
+                "([\\s\\S]*?)"                      // Текст до      (1)
+                "(\\d+\\,?\\d*[°'\"]?"              // Значение      (2)
+                "(\\d+\\,?\\d*[°'\"]?)?"
+                "(\\d+\\,?\\d*[°'\"]?)?)\\s*"
                 "("
                    "(\\(?"
-                      "([\\+\\-]?\\d+\\,?\\d*°?)\\s*"             // Верхнее отклонение (6)
-                      "(\\;\\s*([\\+\\-]?\\d+\\,?\\d*°?)\\s*)?"   // Нижнее отклонение  (8)
+                      "([\\+\\-]?\\d+\\,?\\d*[°'\"]?"           // Верхнее отклонение (7)
+                      "(\\d+\\,?\\d*[°'\"]?)?"
+                      "(\\d+\\,?\\d*[°'\"]?)?)\\s*"
+                      "(\\;\\s*([\\+\\-]?\\d+\\,?\\d*[°'\"]?"   // Нижнее отклонение  (11)
+                      "(\\d+\\,?\\d*[°'\"]?)?"
+                      "(\\d+\\,?\\d*[°'\"]?)?)\\s*)?"
                    "\\)?\\s*)"
                    "|(\\(?"
                       "((±)|(\\+\\-))"
-                      "(\\d+\\,?\\d*°?)"                     // Верх./нижн. отклонение (13)
+                      "(\\d+\\,?\\d*[°'\"]?"        // Верх./нижн. отклонение (18)
+                      "(\\d+\\,?\\d*[°'\"]?)?"
+                      "(\\d+\\,?\\d*[°'\"]?)?)"
                    "\\)?\\s*)"
                 ")?"
-                "([\\s\\S]*)?"                             // Текст после   (14)
+                "([\\s\\S]*)?"                      // Текст после   (21)
                 );
 
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1);    // Текст до
         QString nominal = match.captured(2);   // Значение
-        QString es = match.captured(5);        // Верхнее отклонение
-        QString ei = match.captured(7);        // Нижнее отклонение
-        QString es_ei = match.captured(12);    // Верх./нижн. отклонение
-        QString after = match.captured(13);    // Текст после
+        QString es = match.captured(7);        // Верхнее отклонение
+        QString ei = match.captured(11);       // Нижнее отклонение
+        QString es_ei = match.captured(18);    // Верх./нижн. отклонение
+        QString after = match.captured(21);    // Текст после
 
         qDebug() << "\n"
                  << "               Элемент:" << "Угловой размер:" << "\n"
