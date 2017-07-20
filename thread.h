@@ -9,37 +9,40 @@ public:
     Thread();
 
     //! Метрическая резьба
-    void metricalThread(const QString &designation);
+    QString metricalThread(const QString &designation);
 
     //! Метрическая резьба с профилем MJ
-    void metricalMjThread(const QString &designation);
+    QString metricalMjThread(const QString &designation);
 
     //! Трапецеидальная многозаходная
-    void trapezoidalMultiStartThread(const QString &designation);
+    QString trapezoidalMultiStartThread(const QString &designation);
 
     //! Трапецеидальная однозаходная
-    void trapezoidalSingleStartThread(const QString &designation);
+    QString trapezoidalSingleStartThread(const QString &designation);
 
     //! Упорная
-    void buttressThread(const QString &designation);
+    QString buttressThread(const QString &designation);
 
     //! Упорная усиленная 45
-    void buttress45Thread(const QString &designation);
+    QString buttress45Thread(const QString &designation);
 
     //! Трубная цилиндрическая
-    void pipeCylindricalThread(const QString &designation);
+    QString pipeCylindricalThread(const QString &designation);
 
     //! Трубная коническая
-    void pipeTaperThread(const QString &designation);
+    QString pipeTaperThread(const QString &designation);
 
     //! Метрическая коническая
-    void metricTaperThread(const QString &designation);
+    QString metricTaperThread(const QString &designation);
 
     //! Коническая дюймовая
-    void inchTaperThread(const QString &designation);
+    QString inchTaperThread(const QString &designation);
 
     //! Круглая для санитарно-технической арматуры
-    void roundTaperThread(const QString &designation);
+    QString roundTaperThread(const QString &designation);
+
+    //! Любая резьба
+    QString anyThread(const QString &designation);
 
 };
 

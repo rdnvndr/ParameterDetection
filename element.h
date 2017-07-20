@@ -9,13 +9,16 @@ public:
     Element();
 
     //! Фаска
-    void chamfer(const QString &designation);
+    QString chamfer(const QString &designation);
 
     //! Линейный размер
-    void lineDimension(const QString &designation);
+    QString lineDimension(const QString &designation);
 
     //! Угловой размер
-    void angleDimension(const QString &designation);
+    QString angleDimension(const QString &designation);
+
+    //! Любой размер
+    QString anyDimension(const QString &designation);
 };
 
 #endif // ELEMENT_H

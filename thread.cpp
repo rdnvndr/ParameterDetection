@@ -1,17 +1,17 @@
 #include "thread.h"
 
 #include <QRegularExpression>
-#include <QDebug>
+
 
 Thread::Thread()
 {
 
 }
 
-void Thread::metricalThread(const QString &designation)
+QString Thread::metricalThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                               // Текст до (1)
+                "([\\s\\S]*?)"                              // Текст до (1)
                 "M\\s*"                                     // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"                       // Диаметр  (2)
                 "("
@@ -33,6 +33,7 @@ void Thread::metricalThread(const QString &designation)
                 "([\\s\\S]*)?"                              // Текст после  (19)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1);  // Текст до
@@ -49,26 +50,26 @@ void Thread::metricalThread(const QString &designation)
         QString lh = match.captured(18);     // Левая резьба
         QString after = match.captured(19);  // Текст после
 
-        qDebug() << "\n"
-                 << "        Тип резьбы:" << "Метрическая резьба" << "\n"
-                 << "          Текст до:" << before << "\n"
-                 << "           Диаметр:" << d  << "\n"
-                 << "   Многозаходность:" << ph << "\n"
-                 << "               Ход:" << h  << "\n"
-                 << "           Заходов:" << z  << "\n"
-                 << "               Шаг:" << p1 << "\n"
-                 << "            Допуск:" << t  << "\n"
-                 << "Группа свинчивания:" << g  << "\n"
-                 << " Длина свинчивания:" << l  << "\n"
-                 << "      Левая резьба:" << lh << "\n"
-                 << "       Текст после:" << after << "\n";
+        result  = QString("        Тип резьбы: Метрическая резьба\n")
+                + QString("          Текст до: %1\n").arg(before)
+                + QString("           Диаметр: %1\n").arg(d)
+                + QString("   Многозаходность: %1\n").arg(ph)
+                + QString("               Ход: %1\n").arg(h)
+                + QString("           Заходов: %1\n").arg(z)
+                + QString("               Шаг: %1\n").arg(p1)
+                + QString("            Допуск: %1\n").arg(t)
+                + QString("Группа свинчивания: %1\n").arg(g)
+                + QString(" Длина свинчивания: %1\n").arg(l)
+                + QString("      Левая резьба: %1\n").arg(lh)
+                + QString("       Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::metricalMjThread(const QString &designation)
+QString Thread::metricalMjThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"               // Текст до       (1)
+                "([\\s\\S]*?)"              // Текст до       (1)
                 "MJ\\s*"                    // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"       // Диаметр        (2)
                 "("
@@ -80,6 +81,7 @@ void Thread::metricalMjThread(const QString &designation)
                 "([\\s\\S]*)?"              // Текст после    (9)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -89,21 +91,21 @@ void Thread::metricalMjThread(const QString &designation)
         QString lh = match.captured(8);     // Левая резьба
         QString after = match.captured(9);  // Текст после
 
-        qDebug() << "\n"
-                 << "  Тип резьбы:" << "Метрическая резьба с профилем MJ" << "\n"
-                 << "    Текст до:" << before << "\n"
-                 << "     Диаметр:" << d      << "\n"
-                 << "         Шаг:" << p      << "\n"
-                 << "      Допуск:" << t      << "\n"
-                 << "Левая резьба:" << lh     << "\n"
-                 << " Текст после:" << after  << "\n";
+        result  = QString("  Тип резьбы: Метрическая резьба с профилем MJ\n")
+                + QString("    Текст до: %1\n").arg(before)
+                + QString("     Диаметр: %1\n").arg(d)
+                + QString("         Шаг: %1\n").arg(p)
+                + QString("      Допуск: %1\n").arg(t)
+                + QString("Левая резьба: %1\n").arg(lh)
+                + QString(" Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::trapezoidalMultiStartThread(const QString &designation)
+QString Thread::trapezoidalMultiStartThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до           (1)
+                "([\\s\\S]*?)"                    // Текст до           (1)
                 "Tr\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -117,6 +119,7 @@ void Thread::trapezoidalMultiStartThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (10)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -128,23 +131,23 @@ void Thread::trapezoidalMultiStartThread(const QString &designation)
         QString l = match.captured(9);      // Длина свинчивания
         QString after = match.captured(10); // Текст после
 
-        qDebug() << "\n"
-                 << "       Тип резьбы:" << "Трапецеидальная многозаходная" << "\n"
-                 << "         Текст до:" << before << "\n"
-                 << "          Диаметр:" << d  << "\n"
-                 << "              Ход:" << h  << "\n"
-                 << "              Шаг:" << p  << "\n"
-                 << "     Левая резьба:" << lh << "\n"
-                 << "           Допуск:" << t  << "\n"
-                 << "Длина свинчивания:" << l  << "\n"
-                 << "      Текст после:" << after << "\n";
+        result =  QString("       Тип резьбы: Трапецеидальная многозаходная\n")
+                + QString("         Текст до: %1\n").arg(before)
+                + QString("          Диаметр: %1\n").arg(d)
+                + QString("              Ход: %1\n").arg(h)
+                + QString("              Шаг: %1\n").arg(p)
+                + QString("     Левая резьба: %1\n").arg(lh)
+                + QString("           Допуск: %1\n").arg(t)
+                + QString("Длина свинчивания: %1\n").arg(l)
+                + QString("      Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::trapezoidalSingleStartThread(const QString &designation)
+QString Thread::trapezoidalSingleStartThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до           (1)
+                "([\\s\\S]*?)"                    // Текст до           (1)
                 "Tr\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -155,6 +158,7 @@ void Thread::trapezoidalSingleStartThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (10)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -165,19 +169,19 @@ void Thread::trapezoidalSingleStartThread(const QString &designation)
         QString l = match.captured(8);      // Длина свинчивания
         QString after = match.captured(9); // Текст после
 
-        qDebug() << "\n"
-                 << "       Тип резьбы:" << "Трапецеидальная однозаходная" << "\n"
-                 << "         Текст до:" << before << "\n"
-                 << "          Диаметр:" << d  << "\n"
-                 << "              Шаг:" << p      << "\n"
-                 << "     Левая резьба:" << lh << "\n"
-                 << "           Допуск:" << t  << "\n"
-                 << "Длина свинчивания:" << l  << "\n"
-                 << "      Текст после:" << after << "\n";
+        result  = QString("       Тип резьбы: Трапецеидальная однозаходная\n")
+                + QString("         Текст до: %1\n").arg(before)
+                + QString("          Диаметр: %1\n").arg(d)
+                + QString("              Шаг: %1\n").arg(p)
+                + QString("     Левая резьба: %1\n").arg(lh)
+                + QString("           Допуск: %1\n").arg(t)
+                + QString("Длина свинчивания: %1\n").arg(l)
+                + QString("      Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::buttressThread(const QString &designation)
+QString Thread::buttressThread(const QString &designation)
 {
     QRegularExpression regex(
                 "([\\s\\S]*?)"                     // Текст до           (1)
@@ -196,6 +200,7 @@ void Thread::buttressThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (14)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -209,20 +214,20 @@ void Thread::buttressThread(const QString &designation)
         QString l = match.captured(13);     // Длина свинчивания
         QString after = match.captured(14); // Текст после
 
-        qDebug() << "\n"
-                 << "       Тип резьбы:" << "Упорная" << "\n"
-                 << "         Текст до:" << before << "\n"
-                 << "          Диаметр:" << d  << "\n"
-                 << "              Ход:" << h  << "\n"
-                 << "              Шаг:" << p1 << "\n"
-                 << "     Левая резьба:" << lh << "\n"
-                 << "           Допуск:" << t  << "\n"
-                 << "Длина свинчивания:" << l  << "\n"
-                 << "      Текст после:" << after << "\n";
+        result  = QString("       Тип резьбы: Упорная\n")
+                + QString("         Текст до: %1\n").arg(before)
+                + QString("          Диаметр: %1\n").arg(d)
+                + QString("              Ход: %1\n").arg(h)
+                + QString("              Шаг: %1\n").arg(p1)
+                + QString("     Левая резьба: %1\n").arg(lh)
+                + QString("           Допуск: %1\n").arg(t)
+                + QString("Длина свинчивания: %1\n").arg(l)
+                + QString("      Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::buttress45Thread(const QString &designation)
+QString Thread::buttress45Thread(const QString &designation)
 {
     QRegularExpression regex(
                 "([\\s\\S]*?)"                     // Текст до           (1)
@@ -241,6 +246,7 @@ void Thread::buttress45Thread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (14)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -254,23 +260,23 @@ void Thread::buttress45Thread(const QString &designation)
         QString l = match.captured(13);     // Длина свинчивания
         QString after = match.captured(14); // Текст после
 
-        qDebug() << "\n"
-                 << "       Тип резьбы:" << "Упорная усиленная 45" << "\n"
-                 << "         Текст до:" << before << "\n"
-                 << "          Диаметр:" << d  << "\n"
-                 << "              Ход:" << h  << "\n"
-                 << "              Шаг:" << p1 << "\n"
-                 << "     Левая резьба:" << lh << "\n"
-                 << "           Допуск:" << t  << "\n"
-                 << "Длина свинчивания:" << l  << "\n"
-                 << "      Текст после:" << after << "\n";
+        result  = QString("       Тип резьбы: Упорная усиленная 45\n")
+                + QString("         Текст до: %1\n").arg(before)
+                + QString("          Диаметр: %1\n").arg(d)
+                + QString("              Ход: %1\n").arg(h)
+                + QString("              Шаг: %1\n").arg(p1)
+                + QString("     Левая резьба: %1\n").arg(lh)
+                + QString("           Допуск: %1\n").arg(t)
+                + QString("Длина свинчивания: %1\n").arg(l)
+                + QString("      Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::pipeCylindricalThread(const QString &designation)
+QString Thread::pipeCylindricalThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до           (1)
+                "([\\s\\S]*?)"                    // Текст до           (1)
                 "G\\s*"                           // Тип резьбы
                 "(\\d+\\/?\\d*)+\\s*"             // Диаметр            (2)
                 "([Ll][Hh])?\\s*"                 // Левая резьба       (3)
@@ -279,6 +285,7 @@ void Thread::pipeCylindricalThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после        (8)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -288,21 +295,21 @@ void Thread::pipeCylindricalThread(const QString &designation)
         QString l = match.captured(7);      // Длина свинчивания
         QString after = match.captured(8);  // Текст после
 
-        qDebug() << "\n"
-                 << "       Тип резьбы:" << "Трубная цилиндрическая" << "\n"
-                 << "         Текст до:" << before << "\n"
-                 << "          Диаметр:" << d  << "\n"
-                 << "     Левая резьба:" << lh << "\n"
-                 << "           Допуск:" << t  << "\n"
-                 << "Длина свинчивания:" << l  << "\n"
-                 << "      Текст после:" << after << "\n";
+        result  = QString("       Тип резьбы: Трубная цилиндрическая\n")
+                + QString("         Текст до: %1\n").arg(before)
+                + QString("          Диаметр: %1\n").arg(d)
+                + QString("     Левая резьба: %1\n").arg(lh)
+                + QString("           Допуск: %1\n").arg(t)
+                + QString("Длина свинчивания: %1\n").arg(l)
+                + QString("      Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::pipeTaperThread(const QString &designation)
+QString Thread::pipeTaperThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до      (1)
+                "([\\s\\S]*?)"                    // Текст до      (1)
                 "R"                               // Тип резьбы
                 "(c)?\\s*"                        // Система       (2)
                 "(\\d+\\/?\\d*)+\\s*"             // Диаметр       (3)
@@ -310,6 +317,7 @@ void Thread::pipeTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (5)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -318,20 +326,20 @@ void Thread::pipeTaperThread(const QString &designation)
         QString lh = match.captured(4);     // Левая резьба
         QString after = match.captured(5);  // Текст после
 
-        qDebug() << "\n"
-                 << "  Тип резьбы:" << "Трубная коническая" << "\n"
-                 << "    Текст до:" << before << "\n"
-                 << "     Система:" << s  << "\n"
-                 << "     Диаметр:" << d  << "\n"
-                 << "Левая резьба:" << lh << "\n"
-                 << " Текст после:" << after << "\n";
+        result  = QString("  Тип резьбы: Трубная коническая\n")
+                + QString("    Текст до: %1\n").arg(before)
+                + QString("     Система: %1\n").arg(s)
+                + QString("     Диаметр: %1\n").arg(d)
+                + QString("Левая резьба: %1\n").arg(lh)
+                + QString(" Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::metricTaperThread(const QString &designation)
+QString Thread::metricTaperThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до      (1)
+                "([\\s\\S]*?)"                    // Текст до      (1)
                 "МК\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр       (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -341,6 +349,7 @@ void Thread::metricTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (5)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -349,20 +358,20 @@ void Thread::metricTaperThread(const QString &designation)
         QString lh = match.captured(4);     // Левая резьба
         QString after = match.captured(5);  // Текст после
 
-        qDebug() << "\n"
-                 << "  Тип резьбы:" << "Метрическая коническая" << "\n"
-                 << "    Текст до:" << before << "\n"
-                 << "     Диаметр:" << d  << "\n"
-                 << "         Шаг:" << p  << "\n"
-                 << "Левая резьба:" << lh << "\n"
-                 << " Текст после:" << after << "\n";
+        result  = QString("  Тип резьбы: Метрическая коническая\n")
+                + QString("    Текст до: %1\n").arg(before)
+                + QString("     Диаметр: %1\n").arg(d)
+                + QString("         Шаг: %1\n").arg(p)
+                + QString("Левая резьба: %1\n").arg(lh)
+                + QString(" Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::inchTaperThread(const QString &designation)
+QString Thread::inchTaperThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до      (1)
+                "([\\s\\S]*?)"                    // Текст до      (1)
                 "К\\s*"                           // Тип резьбы
                 "(\\d+\\/?\\d*)+\"?\\s*"          // Диаметр       (1)
                 "([Ll][Hh])?\\s*"                 // Левая резьба  (3)
@@ -370,6 +379,7 @@ void Thread::inchTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (4)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -377,19 +387,19 @@ void Thread::inchTaperThread(const QString &designation)
         QString lh = match.captured(3);     // Левая резьба
         QString after = match.captured(4);  // Текст после
 
-        qDebug() << "\n"
-                 << "  Тип резьбы:" << "Коническая дюймовая" << "\n"
-                 << "    Текст до:" << before << "\n"
-                 << "     Диаметр:" << d  << "\n"
-                 << "Левая резьба:" << lh << "\n"
-                 << " Текст после:" << after << "\n";
+        result  = QString("  Тип резьбы: Коническая дюймовая\n")
+                + QString("    Текст до: %1\n").arg(before)
+                + QString("     Диаметр: %1\n").arg(d)
+                + QString("Левая резьба: %1\n").arg(lh)
+                + QString(" Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Thread::roundTaperThread(const QString &designation)
+QString Thread::roundTaperThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до      (1)
+                "([\\s\\S]*?)"                    // Текст до      (1)
                 "Кр\\s*"                          // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр       (2)
                 "[xX]\\s*"                        // Знак умножения
@@ -398,6 +408,7 @@ void Thread::roundTaperThread(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (4)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -405,11 +416,60 @@ void Thread::roundTaperThread(const QString &designation)
         QString p = match.captured(3);      // Шаг
         QString after = match.captured(4);  // Текст после
 
-        qDebug() << "\n"
-                 << "  Тип резьбы:" << "Круглая для санитарно-технической арматуры" << "\n"
-                 << "    Текст до:" << before << "\n"
-                 << "     Диаметр:" << d  << "\n"
-                 << "         Шаг:" << p  << "\n"
-                 << " Текст после:" << after << "\n";
+        result  = QString("  Тип резьбы: Круглая для санитарно-технической арматуры\n")
+                + QString("    Текст до: %1\n").arg(before)
+                + QString("     Диаметр: %1\n").arg(d )
+                + QString("         Шаг: %1\n").arg(p )
+                + QString(" Текст после: %1\n").arg(after);
     }
+    return result;
+}
+
+QString Thread::anyThread(const QString &designation)
+{
+    QString result;
+
+    result = this->metricalThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->metricalMjThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->trapezoidalMultiStartThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->trapezoidalSingleStartThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->buttressThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->buttressThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->buttress45Thread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->buttress45Thread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->pipeCylindricalThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->pipeTaperThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->pipeTaperThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->metricTaperThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->inchTaperThread(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->roundTaperThread(designation);
+    if (!result.isEmpty()) return result;
+
+    return "";
 }

@@ -1,14 +1,13 @@
 #include "element.h"
 
 #include <QRegularExpression>
-#include <QDebug>
 
 Element::Element()
 {
 
 }
 
-void Element::chamfer(const QString &designation)
+QString Element::chamfer(const QString &designation)
 {
     QRegularExpression regex(
                 "([\\s\\S]*?)"             // Текст до      (1)
@@ -18,6 +17,7 @@ void Element::chamfer(const QString &designation)
                 "([\\s\\S]*)?"                    // Текст после   (4)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1); // Текст до
@@ -25,16 +25,16 @@ void Element::chamfer(const QString &designation)
         QString a = match.captured(3);      // Шаг
         QString after = match.captured(4);  // Текст после
 
-        qDebug() << "\n"
-                 << "     Элемент:" << "Фаска" << "\n"
-                 << "    Текст до:" << before << "\n"
-                 << "    Значение:" << f  << "\n"
-                 << "        Угол:" << a  << "\n"
-                 << " Текст после:" << after << "\n";
+        result = QString("     Элемент: Фаска")
+                + QString("    Текст до: %1\n").arg(before)
+                + QString("    Значение: %1\n").arg(f)
+                + QString("        Угол: %1\n").arg(a)
+                + QString(" Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Element::lineDimension(const QString &designation)
+QString Element::lineDimension(const QString &designation)
 {
     QRegularExpression regex(
                 "([\\s\\S]*?)"                             // Текст до      (1)
@@ -53,6 +53,7 @@ void Element::lineDimension(const QString &designation)
                 "([\\s\\S]*)?"                             // Текст после   (14)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1);    // Текст до
@@ -63,19 +64,19 @@ void Element::lineDimension(const QString &designation)
         QString es_ei = match.captured(13);    // Верх./нижн. отклонение
         QString after = match.captured(14);    // Текст после
 
-        qDebug() << "\n"
-                 << "               Элемент:" << "Линейный размер:" << "\n"
-                 << "              Текст до:" << before << "\n"
-                 << "              Значение:" << nominal  << "\n"
-                 << "         Класс допуска:" << tolClass  << "\n"
-                 << "    Верхнее отклонение:" << es << "\n"
-                 << "     Нижнее отклонение:" << ei << "\n"
-                 << "Верх./нижн. отклонение:" << es_ei << "\n"
-                 << "           Текст после:" << after << "\n";
+        result  = QString("               Элемент: Линейный размер\n")
+                + QString("              Текст до: %1\n").arg(before)
+                + QString("              Значение: %1\n").arg(nominal)
+                + QString("         Класс допуска: %1\n").arg(tolClass)
+                + QString("    Верхнее отклонение: %1\n").arg(es)
+                + QString("     Нижнее отклонение: %1\n").arg(ei)
+                + QString("Верх./нижн. отклонение: %1\n").arg(es_ei)
+                + QString("           Текст после: %1\n").arg(after);
     }
+    return result;
 }
 
-void Element::angleDimension(const QString &designation)
+QString Element::angleDimension(const QString &designation)
 {
     QRegularExpression regex(
                 "([\\s\\S]*?)"                      // Текст до      (1)
@@ -101,6 +102,7 @@ void Element::angleDimension(const QString &designation)
                 "([\\s\\S]*)?"                      // Текст после   (21)
                 );
 
+    QString result;
     QRegularExpressionMatch match = regex.match(designation);
     if (match.hasMatch()) {
         QString before = match.captured(1);    // Текст до
@@ -110,13 +112,29 @@ void Element::angleDimension(const QString &designation)
         QString es_ei = match.captured(18);    // Верх./нижн. отклонение
         QString after = match.captured(21);    // Текст после
 
-        qDebug() << "\n"
-                 << "               Элемент:" << "Угловой размер:" << "\n"
-                 << "              Текст до:" << before << "\n"
-                 << "              Значение:" << nominal  << "\n"
-                 << "    Верхнее отклонение:" << es << "\n"
-                 << "     Нижнее отклонение:" << ei << "\n"
-                 << "Верх./нижн. отклонение:" << es_ei << "\n"
-                 << "           Текст после:" << after << "\n";
+        result  = QString("               Элемент: Угловой размер\n")
+                + QString("              Текст до: %1\n").arg(before)
+                + QString("              Значение: %1\n").arg(nominal)
+                + QString("    Верхнее отклонение: %1\n").arg(es)
+                + QString("     Нижнее отклонение: %1\n").arg(ei)
+                + QString("Верх./нижн. отклонение: %1\n").arg(es_ei)
+                + QString("           Текст после: %1\n").arg(after);
     }
+    return result;
+}
+
+QString Element::anyDimension(const QString &designation)
+{
+    QString result;
+
+    result = this->angleDimension(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->lineDimension(designation);
+    if (!result.isEmpty()) return result;
+
+    result = this->chamfer(designation);
+    if (!result.isEmpty()) return result;
+
+    return "";
 }
