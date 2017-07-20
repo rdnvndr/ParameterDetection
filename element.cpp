@@ -127,14 +127,16 @@ QString Element::anyDimension(const QString &designation)
 {
     QString result;
 
+    result = this->chamfer(designation);
+    if (!result.isEmpty()) return result;
+
     result = this->angleDimension(designation);
     if (!result.isEmpty()) return result;
 
     result = this->lineDimension(designation);
     if (!result.isEmpty()) return result;
 
-    result = this->chamfer(designation);
-    if (!result.isEmpty()) return result;
+
 
     return "";
 }
