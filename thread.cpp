@@ -167,7 +167,7 @@ QString Thread::trapezoidalSingleStartThread(const QString &designation)
         QString lh = match.captured(4);     // Левая резьба
         QString t = match.captured(6);      // Допуск
         QString l = match.captured(8);      // Длина свинчивания
-        QString after = match.captured(9); // Текст после
+        QString after = match.captured(9);  // Текст после
 
         result  = QString("       Тип резьбы: Трапецеидальная однозаходная\n")
                 + QString("         Текст до: %1\n").arg(before)
@@ -184,7 +184,7 @@ QString Thread::trapezoidalSingleStartThread(const QString &designation)
 QString Thread::buttressThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до           (1)
+                "([\\s\\S]*?)"                    // Текст до           (1)
                 "S\\s*"                           // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "(("
@@ -230,7 +230,7 @@ QString Thread::buttressThread(const QString &designation)
 QString Thread::buttress45Thread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                     // Текст до           (1)
+                "([\\s\\S]*?)"                    // Текст до           (1)
                 "S45°\\s*"                        // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"             // Диаметр            (2)
                 "(("
@@ -311,7 +311,7 @@ QString Thread::pipeTaperThread(const QString &designation)
     QRegularExpression regex(
                 "([\\s\\S]*?)"                    // Текст до      (1)
                 "R"                               // Тип резьбы
-                "(c)?\\s*"                        // Система       (2)
+                "([c\\s])\\s*"                    // Система       (2)
                 "(\\d+\\/?\\d*)+\\s*"             // Диаметр       (3)
                 "([Ll][Hh])?\\s*"                 // Левая резьба  (4)
                 "([\\s\\S]*)?"                    // Текст после   (5)
