@@ -276,13 +276,13 @@ QString Thread::buttress45Thread(const QString &designation)
 QString Thread::pipeCylindricalThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                    // Текст до           (1)
-                "G\\s*"                           // Тип резьбы
-                "(\\d+\\/?\\d*)+\\s*"             // Диаметр            (2)
-                "([Ll][Hh])?\\s*"                 // Левая резьба       (3)
-                "(\\-\\s*(\\w))?\\s*"             // Допуск             (5)
-                "(\\-\\s*(\\d+\\,?\\d*))?\\s*"    // Длина  свинчивания (7)
-                "([\\s\\S]*)?"                    // Текст после        (8)
+                "([\\s\\S]*?)"                         // Текст до           (1)
+                "G\\s*"                                // Тип резьбы
+                "(\\d*[\\,\\.]?\\s*\\d+\\/?\\d*)+\\s*" // Диаметр            (2)
+                "([Ll][Hh])?\\s*"                      // Левая резьба       (3)
+                "(\\-\\s*(\\w))?\\s*"                  // Допуск             (5)
+                "(\\-\\s*(\\d+\\,?\\d*))?\\s*"         // Длина  свинчивания (7)
+                "([\\s\\S]*)?"                         // Текст после        (8)
                 );
 
     QString result;
@@ -309,12 +309,12 @@ QString Thread::pipeCylindricalThread(const QString &designation)
 QString Thread::pipeTaperThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                    // Текст до      (1)
-                "R"                               // Тип резьбы
-                "([c\\s])\\s*"                    // Система       (2)
-                "(\\d+\\/?\\d*)+\\s*"             // Диаметр       (3)
-                "([Ll][Hh])?\\s*"                 // Левая резьба  (4)
-                "([\\s\\S]*)?"                    // Текст после   (5)
+                "([\\s\\S]*?)"                         // Текст до      (1)
+                "R"                                    // Тип резьбы
+                "([c\\s])\\s*"                         // Система       (2)
+                "(\\d*[\\,\\.]?\\s*\\d+\\/?\\d*)+\\s*" // Диаметр       (3)
+                "([Ll][Hh])?\\s*"                      // Левая резьба  (4)
+                "([\\s\\S]*)?"                         // Текст после   (5)
                 );
 
     QString result;
@@ -371,12 +371,12 @@ QString Thread::metricTaperThread(const QString &designation)
 QString Thread::inchTaperThread(const QString &designation)
 {
     QRegularExpression regex(
-                "([\\s\\S]*?)"                    // Текст до      (1)
-                "К\\s*"                           // Тип резьбы
-                "(\\d+\\/?\\d*)+\"?\\s*"          // Диаметр       (1)
-                "([Ll][Hh])?\\s*"                 // Левая резьба  (3)
+                "([\\s\\S]*?)"                            // Текст до      (1)
+                "К\\s*"                                   // Тип резьбы
+                "(\\d*[\\,\\.]?\\s*\\d+\\/?\\d*)+\"?\\s*" // Диаметр       (2)
+                "([Ll][Hh])?\\s*"                         // Левая резьба  (3)
                 "ГОСТ\\s*6111\\s*-\\s*52\\s*"
-                "([\\s\\S]*)?"                    // Текст после   (4)
+                "([\\s\\S]*)?"                            // Текст после   (4)
                 );
 
     QString result;
