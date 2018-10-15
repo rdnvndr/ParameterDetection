@@ -14,6 +14,7 @@ QString Thread::metricalThread(const QString &designation)
                 "([\\s\\S]*?)"                              // Текст до (1)
                 "M\\s*"                                     // Тип резьбы
                 "(\\d+\\,?\\d*)+\\s*"                       // Диаметр  (2)
+
                 "("
                    "("
                       "[xX]\\s*"                                    // Знак умножения
@@ -25,12 +26,18 @@ QString Thread::metricalThread(const QString &designation)
                 ")?"
 
                 "(\\-\\s*(\\d{1,1}\\w{1,1}\\d?\\w?))?\\s*"      // Допуск (12)
-                "(\\-\\s*"
-                   "([SsLl])?\\s*"                              // Группа свинчивания (14)
-                   "(\\(\\s*(\\d+\\,?\\d*)\\s*\\))?\\s*"        // Длина  свинчивания (16)
+
+                "("
+                    "(\\-\\s*([Ll][Hh])\\s*)|("                 // Левая резьба (15)
+                        "(\\-\\s*"
+                           "([SsLl])?\\s*"                       // Группа свинчивания (18)
+                           "(\\(\\s*(\\d+\\,?\\d*)\\s*\\))?\\s*" // Длина  свинчивания (20)
+                        ")?"
+                        "(\\-\\s*([Ll][Hh]))?\\s*"               // Левая резьба (22)
+                    ")"
                 ")?"
-                "(\\-\\s*([Ll][Hh]))?\\s*"                  // Левая резьба (18)
-                "([\\s\\S]*)?"                              // Текст после  (19)
+
+                "([\\s\\S]*)?"                              // Текст после  (23)
                 );
 
     QString result;
@@ -45,10 +52,11 @@ QString Thread::metricalThread(const QString &designation)
         QString p1 = (p.isEmpty())
                 ? match.captured(10) : p;    // Шаг
         QString t = match.captured(12);      // Допуск
-        QString g = match.captured(14);      // Группа длины свинчивания
-        QString l = match.captured(16);      // Длина свинчивания
-        QString lh = match.captured(18);     // Левая резьба
-        QString after = match.captured(19);  // Текст после
+        QString lh = match.captured(15);     // Левая резьба
+        if (lh.isEmpty()) lh = match.captured(22);
+        QString g = match.captured(18);      // Группа длины свинчивания
+        QString l = match.captured(20);      // Длина свинчивания
+        QString after = match.captured(23);  // Текст после
 
         result  = QString("        Тип резьбы: Метрическая резьба\n")
                 + QString("          Текст до: %1\n").arg(before)
